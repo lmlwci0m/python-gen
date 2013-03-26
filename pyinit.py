@@ -5,9 +5,9 @@ import os
 import logging
 import argparse
 from genutils.objgen import BasePythonFile
-            
 
-if __name__ == '__main__':
+
+def parse():
 
     parser = argparse.ArgumentParser()
     
@@ -15,7 +15,11 @@ if __name__ == '__main__':
     'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'])
     parser.add_argument("filepath", help="absolute path of the python file to create")
     
-    args = parser.parse_args()
+    return parser.parse_args()        
+
+if __name__ == '__main__':
+
+    args = parse()
     
     if args.log:
         logging.basicConfig(level=getattr(logging, args.log.upper()))

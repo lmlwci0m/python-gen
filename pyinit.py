@@ -15,16 +15,21 @@ def parse():
     'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'])
     parser.add_argument("filepath", help="absolute path of the python file to create")
     
-    return parser.parse_args()        
+    return parser.parse_args()
+    
+
+def setup_log(args):
+    if args.log:
+        logging.basicConfig(level=getattr(logging, args.log.upper()))
+    else:
+        logging.basicConfig(level=logging.INFO)
+        
 
 if __name__ == '__main__':
 
     args = parse()
     
-    if args.log:
-        logging.basicConfig(level=getattr(logging, args.log.upper()))
-    else:
-        logging.basicConfig(level=logging.INFO)
+    setup_log(args)
         
     logging.info("Starting main generation...")
         
